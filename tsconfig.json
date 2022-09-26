@@ -1,0 +1,33 @@
+{
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist", "devapp-build"],
+  "compilerOptions": {
+    "baseUrl": "src",
+    "moduleResolution": "node",
+    "target": "es2017",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "strict": true,
+    "allowJs": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "jsx": "react-jsx",
+    "declaration": true,
+    "esModuleInterop": true,
+    "types": ["node", "jest"],
+    "rootDirs": ["./src"],
+    "paths": {
+      "Atoms/*": ["./atoms/*"],
+      "Components/*": ["./components/*"],
+      "Core/*": ["./core/*"],
+      "Hooks/*": ["./hooks/*"],
+      "Services/*": ["./services/*"],
+      "Stories/*": ["./stories/*"],
+      "Themes/*": ["./themes/*"],
+      "Styles/*": ["./styles/*"],
+      "Utils/*": ["./utils/*"]
+    }
+  }
+}
