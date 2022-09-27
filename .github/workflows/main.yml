@@ -3,7 +3,7 @@ on:
   push:
     # Sequence of patterns matched against refs/heads
     branches:
-      - master
+      - main
 
 jobs:
   pre-publish:
@@ -15,7 +15,7 @@ jobs:
         uses: anothrNick/github-tag-action@1.39.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_BRANCHES: 'master'
+          RELEASE_BRANCHES: 'main'
           DEFAULT_BUMP: 'patch'
           WITH_V: true
   publish:
@@ -59,7 +59,7 @@ jobs:
       #   uses: nwtgck/actions-netlify@v1.2
       #   with:
       #     publish-dir: './devapp-build'
-      #     production-branch: master
+      #     production-branch: main
       #     github-token: ${{ secrets.GITHUB_TOKEN }}
       #     deploy-message: "Deploy from GitHub Actions"
       #     enable-pull-request-comment: false
