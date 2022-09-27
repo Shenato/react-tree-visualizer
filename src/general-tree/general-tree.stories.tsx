@@ -3,6 +3,7 @@ import React from 'react';
 
 import useWindowSize from 'Hooks/use-window-size';
 import styled from 'styled-components';
+import { ItemComponentProps } from '../types';
 import { defaultStyle } from '../settings';
 import GeneralTree from './general-tree';
 import SvgViewer from '../svg-viewer';
@@ -30,16 +31,7 @@ const MockItemComponent = ({
   isHighlighted,
   connectorColor,
   computedStyles,
-}: {
-  item: any;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
-  isCollapsed: boolean;
-  toggleCollapse: () => void;
-  isHighlighted: boolean;
-  connectorColor: string;
-  computedStyles: typeof defaultStyle;
-}) => {
+}: ItemComponentProps<any>) => {
   return (
     <div
       style={{
