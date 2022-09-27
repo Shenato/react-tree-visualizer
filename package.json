@@ -1,6 +1,6 @@
 {
   "name": "react-tree-visualizer",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A react component library for visualizing tree data structures",
   "main": "dist/bundle.js",
   "types": "dist/index.d.ts",
