@@ -72,10 +72,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shenato/react-tree-visualizer.git"
+    "url": "git+https://github.com/Shenato/react-tree-visualizer.git"
   },
   "bugs": {
-    "url": "https://github.com/shenato/react-tree-visualizer/issues"
+    "url": "https://github.com/Shenato/react-tree-visualizer/issues"
   },
-  "homepage": "https://github.com/shenato/react-tree-visualizer#readme"
+  "homepage": "https://github.com/Shenato/react-tree-visualizer#readme"
 }
