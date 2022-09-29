@@ -31,7 +31,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Get the version
         id: get_version
@@ -40,25 +40,22 @@ jobs:
       - run: npm --no-git-tag-version version $( git describe --tag --abbrev=0 )
 
       - run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
       - run: npm run build
+
+      - name: publish-npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
 
       - name: publish-git
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - uses: actions/setup-node@v2
-      #   with:
-      #     node-version: '16.x'
-      #     registry-url: 'https://registry.npmjs.org'
-
-      # - name: publish-npm
-      #   run: npm publish --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  
 
       # - run: npm run build-storybook
       # - name: Deploy to Netlify
