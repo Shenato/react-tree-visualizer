@@ -51,6 +51,8 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
+      - name: prefix package name with scope
+        run: npm init -y --scope $GITHUB_REPOSITORY_OWNER
 
       - name: publish-git
         run: npm publish
