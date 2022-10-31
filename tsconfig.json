@@ -13,21 +13,10 @@
     "allowJs": true,
     "noImplicitAny": false,
     "strictNullChecks": false,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "declaration": true,
     "esModuleInterop": true,
     "types": ["node", "jest"],
-    "rootDirs": ["./src"],
-    "paths": {
-      "Atoms/*": ["./atoms/*"],
-      "Components/*": ["./components/*"],
-      "Core/*": ["./core/*"],
-      "Hooks/*": ["./hooks/*"],
-      "Services/*": ["./services/*"],
-      "Stories/*": ["./stories/*"],
-      "Themes/*": ["./themes/*"],
-      "Styles/*": ["./styles/*"],
-      "Utils/*": ["./utils/*"]
-    }
+    "rootDirs": ["./src"]
   }
 }

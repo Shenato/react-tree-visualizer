@@ -1,5 +1,5 @@
 import React, { useContext, createContext, useReducer, Dispatch } from 'react';
-import { numArrayComparison } from 'Utils/numbers';
+import { numArrayComparison } from '../utils/numbers';
 import { RenderItem, RenderMatrix, Tree } from '../types';
 import { generateRenderTree } from './treeToRenderAdapter';
 

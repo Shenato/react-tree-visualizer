@@ -1,4 +1,4 @@
-import { numArrayComparison } from 'Utils/numbers';
+import { numArrayComparison } from '../utils/numbers';
 import { RenderMatrix, Tree } from '../types';
 
 /**
