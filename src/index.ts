@@ -1,13 +1,13 @@
-import SVGViewer from './src/svg-viewer';
-import { createTheme } from './src/themes/themes';
-import GeneralTree from './src/general-tree/general-tree';
+import SVGViewer from './svg-viewer';
+import { createTheme } from './themes/themes';
+import GeneralTree from './general-tree/general-tree';
 import {
   Tree,
   ItemComponentProps,
   Options,
   Theme,
   GeneralTreeProps,
-} from './src/types';
+} from './types';
 
 export {
   GeneralTree,
