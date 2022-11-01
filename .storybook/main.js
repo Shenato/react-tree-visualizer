@@ -2,7 +2,6 @@ module.exports = {};
 // .storybook/main.js
 
 const path = require('path');
-const aliases = require('../scripts/aliases');
 const ROOT_DIR = path.resolve(__dirname, '../');
 const SRC_DIR = path.resolve(ROOT_DIR, '/src');
 
@@ -59,14 +58,7 @@ module.exports = {
       use: ['ts-loader'],
     });
     config.resolve.extensions.push('.ts', '.tsx');
-    // Alternately, for an alias:
-    config.resolve.alias = Object.keys(aliases).reduce(
-      (obj, alias) => ({
-        ...obj,
-        [alias]: path.resolve(ROOT_DIR, `src/${aliases[alias]}`),
-      }),
-      {}
-    );
+
     // Return the altered config
     return config;
   },

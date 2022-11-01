@@ -1,4 +1,10 @@
-import React, { useContext, createContext, useReducer, Dispatch } from 'react';
+import React, {
+  useContext,
+  createContext,
+  useReducer,
+  Dispatch,
+  useEffect,
+} from 'react';
 import { numArrayComparison } from '../utils/numbers';
 import { RenderItem, RenderMatrix, Tree } from '../types';
 import { generateRenderTree } from './treeToRenderAdapter';
@@ -31,7 +37,7 @@ export const useItemContext = <T,>(tree: Tree<T>) => {
   const { newResult: renderDataRaw } = generateRenderTree<T>(tree);
   const [, ...renderMatrix] = renderDataRaw;
 
-  return useReducer(
+  const [state, dispatch] = useReducer(
     (previousState, action) => {
       switch (action.type) {
         case 'TOGGLE_COLLAPSE': {
@@ -88,12 +94,22 @@ export const useItemContext = <T,>(tree: Tree<T>) => {
             hoveredItems: [],
           };
         }
+        case 'UPDATE_TREE': {
+          const { newResult: renderDataRawUpdated } =
+            generateRenderTree<T>(tree);
+          const [, ...renderMatrixUpdated] = renderDataRawUpdated;
+          return { ...initialState, renderData: renderMatrixUpdated };
+        }
         default:
-          throw new Error();
+          return { ...previousState, renderData: renderMatrix };
       }
     },
     { ...initialState, renderData: renderMatrix }
   );
+  useEffect(() => {
+    dispatch({ type: 'UPDATE_TREE', payload: tree });
+  }, [tree]);
+  return [state, dispatch];
 };
 
 export const useItemHighlightContext = <T,>({

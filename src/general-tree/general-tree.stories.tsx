@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 
 import styled from 'styled-components';
@@ -88,3 +88,17 @@ const Template = ({ tree, itemComponent, ...args }) => {
 export const Tree = () => (
   <Template tree={generalTreeMock} itemComponent={MockItemComponent} />
 );
+
+export const AsyncTree = () => {
+  const [tree, setTree] = useState({
+    data: { id: 0, ref: { current: null }, type: 0 },
+    children: [],
+  });
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTree(generalTreeMock);
+    }, 300);
+  }, []);
+  return <Template tree={tree} itemComponent={MockItemComponent} />;
+};

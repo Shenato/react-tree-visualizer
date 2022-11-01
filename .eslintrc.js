@@ -1,7 +1,5 @@
 const prettier = require('./prettier.config.js');
 
-const aliases = require('./scripts/aliases.js');
-
 module.exports = {
   extends: [
     'airbnb',
@@ -71,17 +69,7 @@ module.exports = {
     'jsx-a11y/control-has-associated-label': ['off'],
     'jsx-a11y/label-has-associated-control': ['off'],
   },
-  settings: {
-    'import/resolver': {
-      alias: {
-        map: Object.keys(aliases).reduce(
-          (arr, alias) => [...arr, [alias, `./src/${aliases[alias]}`]],
-          []
-        ),
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      },
-    },
-  },
+
   overrides: [
     {
       files: ['*.test.js', '*.spec.js'],
