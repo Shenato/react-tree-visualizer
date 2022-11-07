@@ -10,7 +10,8 @@ import SvgViewer from '../svg-viewer';
 
 import {
   simpleTree as generalTreeMock,
-  simpleTreeMutated,
+  simpleTreeMutatedAtBranch,
+  simpleTreeMutatedAtLeaf,
 } from '../mock-data/simple-tree';
 
 export default {
@@ -106,7 +107,7 @@ export const AsyncTree = () => {
   return <Template tree={tree} itemComponent={MockItemComponent} />;
 };
 
-export const UpdatingTree = () => {
+export const MutatingTreeAtLeaf = () => {
   const [tree, setTree] = useState({
     data: { id: 0, ref: { current: null }, type: 0 },
     children: [],
@@ -116,7 +117,30 @@ export const UpdatingTree = () => {
     let flipflop = true;
     setInterval(() => {
       console.log('setting new tree');
-      setTree(flipflop ? generalTreeMock : simpleTreeMutated);
+      setTree(flipflop ? generalTreeMock : simpleTreeMutatedAtLeaf);
+      flipflop = !flipflop;
+    }, 1000);
+  }, []);
+  return (
+    <GeneralTree
+      // currentRound={4}
+      itemComponent={MockItemComponent}
+      tree={tree}
+    />
+  );
+};
+
+export const MutatingTreeAtBranch = () => {
+  const [tree, setTree] = useState({
+    data: { id: 0, ref: { current: null }, type: 0 },
+    children: [],
+  });
+
+  useEffect(() => {
+    let flipflop = true;
+    setInterval(() => {
+      console.log('setting new tree');
+      setTree(flipflop ? generalTreeMock : simpleTreeMutatedAtBranch);
       flipflop = !flipflop;
     }, 1000);
   }, []);
