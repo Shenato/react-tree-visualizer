@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 import useWindowSize from '../hooks/use-window-size';
-import { ItemComponentProps } from '../types';
+import {
+  DebugItemDataType,
+  ItemComponentProps,
+  Tree as TreeType,
+} from '../types';
 import { defaultStyle } from '../settings';
 import GeneralTree from './general-tree';
 import SvgViewer from '../svg-viewer';
@@ -94,8 +98,9 @@ export const Tree = () => (
 );
 
 export const AsyncTree = () => {
-  const [tree, setTree] = useState({
-    data: { id: 0, ref: { current: null }, type: 0 },
+  const [tree, setTree] = useState<TreeType<DebugItemDataType>>({
+    id: '0',
+    data: { id: 0, type: 0 },
     children: [],
   });
 
@@ -108,15 +113,15 @@ export const AsyncTree = () => {
 };
 
 export const MutatingTreeAtLeaf = () => {
-  const [tree, setTree] = useState({
-    data: { id: 0, ref: { current: null }, type: 0 },
+  const [tree, setTree] = useState<TreeType<DebugItemDataType>>({
+    id: '0',
+    data: { id: 0, type: 0 },
     children: [],
   });
 
   useEffect(() => {
     let flipflop = true;
     setInterval(() => {
-      console.log('setting new tree');
       setTree(flipflop ? generalTreeMock : simpleTreeMutatedAtLeaf);
       flipflop = !flipflop;
     }, 1000);
@@ -131,15 +136,15 @@ export const MutatingTreeAtLeaf = () => {
 };
 
 export const MutatingTreeAtBranch = () => {
-  const [tree, setTree] = useState({
-    data: { id: 0, ref: { current: null }, type: 0 },
+  const [tree, setTree] = useState<TreeType<DebugItemDataType>>({
+    id: '0',
+    data: { id: 0, type: 0 },
     children: [],
   });
 
   useEffect(() => {
     let flipflop = true;
     setInterval(() => {
-      console.log('setting new tree');
       setTree(flipflop ? generalTreeMock : simpleTreeMutatedAtBranch);
       flipflop = !flipflop;
     }, 1000);
