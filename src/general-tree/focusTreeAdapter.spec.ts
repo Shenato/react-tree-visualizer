@@ -18,7 +18,7 @@ describe('given a bigger example', () => {
 
 describe('given a bigger example', () => {
   it('converts it to render data with collapsed children', () => {
-    const { newResult } = generateRenderTree<any>(tinyTree, [[0]]);
+    const { newResult } = generateRenderTree<any>(tinyTree, ['4']);
     expect(newResult).toMatchSnapshot();
   });
 });
