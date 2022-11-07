@@ -8,7 +8,10 @@ import { defaultStyle } from '../settings';
 import GeneralTree from './general-tree';
 import SvgViewer from '../svg-viewer';
 
-import { simpleTree as generalTreeMock } from '../mock-data/simple-tree';
+import {
+  simpleTree as generalTreeMock,
+  simpleTreeMutated,
+} from '../mock-data/simple-tree';
 
 export default {
   title: 'Components/Tree',
@@ -101,4 +104,27 @@ export const AsyncTree = () => {
     }, 300);
   }, []);
   return <Template tree={tree} itemComponent={MockItemComponent} />;
+};
+
+export const UpdatingTree = () => {
+  const [tree, setTree] = useState({
+    data: { id: 0, ref: { current: null }, type: 0 },
+    children: [],
+  });
+
+  useEffect(() => {
+    let flipflop = true;
+    setInterval(() => {
+      console.log('setting new tree');
+      setTree(flipflop ? generalTreeMock : simpleTreeMutated);
+      flipflop = !flipflop;
+    }, 1000);
+  }, []);
+  return (
+    <GeneralTree
+      // currentRound={4}
+      itemComponent={MockItemComponent}
+      tree={tree}
+    />
+  );
 };

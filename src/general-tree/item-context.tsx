@@ -95,10 +95,19 @@ export const useItemContext = <T,>(tree: Tree<T>) => {
           };
         }
         case 'UPDATE_TREE': {
-          const { newResult: renderDataRawUpdated } =
-            generateRenderTree<T>(tree);
+          const { newResult: renderDataRawUpdated } = generateRenderTree<T>(
+            tree,
+            previousState.collapsedItems
+          );
           const [, ...renderMatrixUpdated] = renderDataRawUpdated;
-          return { ...initialState, renderData: renderMatrixUpdated };
+          console.log({
+            ...previousState,
+            renderData: renderMatrixUpdated,
+          });
+          return {
+            ...previousState,
+            renderData: renderMatrixUpdated,
+          };
         }
         default:
           return { ...previousState, renderData: renderMatrix };
