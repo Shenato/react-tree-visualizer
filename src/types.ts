@@ -99,8 +99,9 @@ export type CommonTreeProps = {
 };
 
 export type RenderItem<T> = {
-  y: number;
+  uniqueId: string;
   id: number;
+  y: number;
   path: number[];
   parentId?: number;
   data: T;
@@ -108,7 +109,7 @@ export type RenderItem<T> = {
 
 export type RenderMatrix<T> = RenderItem<T>[][];
 
-export type Tree<T> = { data: T; children: Tree<T>[] };
+export type Tree<T> = { id: string; data: T; children: Tree<T>[] };
 
 export type ItemComponentProps<T> = {
   item: T;
@@ -125,4 +126,12 @@ export type GeneralTreeProps<T> = CommonTreeProps & {
   itemComponent: (props: ItemComponentProps<T>) => JSX.Element;
   currentRound?: string;
   tree: Tree<T>;
+};
+
+export type DebugItemDataType = {
+  type?: number;
+  id: number;
+  disabled?: boolean;
+  hidden?: boolean;
+  scrollAxis?: number;
 };

@@ -57,6 +57,7 @@ export function ItemWrapper<T>({
   const isCollapsed = useIsCollapsed({ currentItem: item });
 
   const onMouseEnter = () => {
+    if (isHighlighted) return;
     dispatch({
       type: 'SET_HOVERED',
       payload: {
@@ -65,6 +66,18 @@ export function ItemWrapper<T>({
       },
     });
   };
+
+  const onMouseMove = () => {
+    if (isHighlighted) return;
+    dispatch({
+      type: 'SET_HOVERED',
+      payload: {
+        currentHoveredItem: item,
+        hoveredColumnIndex: columnIndex,
+      },
+    });
+  };
+
   const onMouseLeave = () => {
     dispatch({ type: 'SET_BLURRED' });
   };
@@ -113,6 +126,7 @@ export function ItemWrapper<T>({
                   connectorColor,
                   computedStyles: calculatedStyle,
                   onMouseEnter,
+                  onMouseMove,
                   onMouseLeave,
                   toggleCollapse,
                 }}

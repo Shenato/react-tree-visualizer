@@ -13,7 +13,7 @@ import { RenderMatrix, Tree } from '../types';
  */
 export function generateRenderTree<T>(
   generalTree: Tree<T>,
-  collapsedPaths: number[][] = [],
+  collapsedIds: string[] = [],
   depth: number = 0,
   verticalStartingPoint = 0,
   parentId: number | undefined = undefined,
@@ -29,9 +29,10 @@ export function generateRenderTree<T>(
   let currentResult = result;
   let currentIterationId = id;
 
-  const { children, data, ...rest } = generalTree;
+  const { children, data, id: currentItemId, ...rest } = generalTree;
   const item = {
     ...rest,
+    uniqueId: currentItemId,
     id: currentIterationId,
     parentId,
     y: currentVerticalStartingPoint,
@@ -43,12 +44,7 @@ export function generateRenderTree<T>(
     ? [...currentResult[depth], item]
     : [item];
 
-  if (
-    children.length === 0 ||
-    collapsedPaths.some(collapsedPath =>
-      numArrayComparison(collapsedPath, path)
-    )
-  ) {
+  if (children.length === 0 || collapsedIds.includes(currentItemId)) {
     return {
       verticalStartingPoint: currentVerticalStartingPoint + 1,
       newResult: currentResult,
@@ -63,7 +59,7 @@ export function generateRenderTree<T>(
       id: resultId,
     } = generateRenderTree(
       children[i],
-      collapsedPaths,
+      collapsedIds,
       depth + 1,
       currentVerticalStartingPoint,
       id,

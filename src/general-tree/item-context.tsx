@@ -13,20 +13,20 @@ type State = {
   // eslint-disable-next-line no-undef
   renderData: RenderMatrix<unknown>;
   hoveredItems: number[];
-  collapsedItems: number[][];
+  collapsedItemIds: string[];
 };
 
 const initialState: State = {
   renderData: [],
   hoveredItems: [],
-  collapsedItems: [],
+  collapsedItemIds: [],
 };
 
 const store = createContext<{ state: State; dispatch: Dispatch<any> }>({
   state: {
     renderData: [[]],
     hoveredItems: [],
-    collapsedItems: [],
+    collapsedItemIds: [],
   },
   dispatch: () => {},
 });
@@ -42,19 +42,14 @@ export const useItemContext = <T,>(tree: Tree<T>) => {
       switch (action.type) {
         case 'TOGGLE_COLLAPSE': {
           const { currentItem } = action.payload ?? {};
-
-          const { path } = currentItem;
-
-          const indexOFRemovedItem = previousState.collapsedItems.findIndex(
-            itemPath => numArrayComparison(itemPath, path)
+          const isAlreadyCollapsed = previousState.collapsedItemIds.includes(
+            currentItem.uniqueId
           );
-
-          const newCollapsedItems =
-            indexOFRemovedItem === -1
-              ? [...previousState.collapsedItems, path]
-              : previousState.collapsedItems.filter(
-                  (item, index) => index !== indexOFRemovedItem
-                );
+          const newCollapsedItems = isAlreadyCollapsed
+            ? previousState.collapsedItemIds.filter(
+                itemId => itemId !== currentItem.uniqueId
+              )
+            : [...previousState.collapsedItemIds, currentItem.uniqueId];
 
           const { newResult: newRenderDataRaw } = generateRenderTree<T>(
             tree,
@@ -64,7 +59,7 @@ export const useItemContext = <T,>(tree: Tree<T>) => {
 
           return {
             ...previousState,
-            collapsedItems: newCollapsedItems,
+            collapsedItemIds: newCollapsedItems,
             renderData: newRenderData,
           };
         }
@@ -95,10 +90,19 @@ export const useItemContext = <T,>(tree: Tree<T>) => {
           };
         }
         case 'UPDATE_TREE': {
-          const { newResult: renderDataRawUpdated } =
-            generateRenderTree<T>(tree);
+          const { newResult: renderDataRawUpdated } = generateRenderTree<T>(
+            tree,
+            previousState.collapsedItemIds
+          );
           const [, ...renderMatrixUpdated] = renderDataRawUpdated;
-          return { ...initialState, renderData: renderMatrixUpdated };
+          console.log({
+            ...previousState,
+            renderData: renderMatrixUpdated,
+          });
+          return {
+            ...previousState,
+            renderData: renderMatrixUpdated,
+          };
         }
         default:
           return { ...previousState, renderData: renderMatrix };
@@ -132,11 +136,11 @@ export const useIsCollapsed = <T,>({
   currentItem: RenderItem<T>;
 }) => {
   const {
-    state: { collapsedItems },
+    state: { collapsedItemIds },
   } = useContext(itemContext);
 
-  const isCollapsed = collapsedItems.some(collapsedPath =>
-    numArrayComparison(collapsedPath, currentItem.path)
+  const isCollapsed = collapsedItemIds.some(
+    collapsedItemId => collapsedItemId === currentItem.uniqueId
   );
 
   return isCollapsed;
