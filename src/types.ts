@@ -53,6 +53,8 @@ export type Options = {
 
   connectorColorHighlight?: string;
 
+  connectorLineThickness?: string;
+
   roundHeader?: {
     isShown?: boolean;
     height?: number;

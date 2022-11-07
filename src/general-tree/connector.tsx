@@ -1,10 +1,11 @@
 import React from 'react';
+import { ComputedOptions } from '../types';
 
 type ConnectorProps = {
   id: number;
   previousMatchPosition: { x: number; y: number };
   currentMatchPosition: { x: number; y: number };
-  calculatedStyle: any;
+  calculatedStyle: ComputedOptions;
   isHighlighted: boolean;
   // eslint-disable-next-line react/require-default-props
   offsetY?: number;
@@ -26,6 +27,7 @@ const Connector = ({
     lineInfo,
     horizontalOffset,
     connectorColorHighlight,
+    connectorLineThickness,
     width,
   } = calculatedStyle;
 
@@ -71,6 +73,7 @@ const Connector = ({
         id={`connector-${id}`}
         fill="transparent"
         stroke={isHighlighted ? connectorColorHighlight : connectorColor}
+        strokeWidth={connectorLineThickness}
       />
     </>
   );

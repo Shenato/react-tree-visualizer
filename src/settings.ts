@@ -1,4 +1,6 @@
-export const defaultStyle = {
+import { ComputedOptions, Options } from './types';
+
+export const defaultStyle: Options = {
   width: 300,
   boxHeight: 110,
   canvasPadding: 25,
@@ -6,6 +8,7 @@ export const defaultStyle = {
   spaceBetweenRows: 50,
   connectorColor: 'rgb(47, 54, 72)',
   connectorColorHighlight: '#DDD',
+  connectorLineThickness: '2px',
   roundHeader: {
     isShown: true,
     height: 40,
@@ -25,9 +28,7 @@ export const defaultStyle = {
   lostByNoShowText: 'NS',
 };
 
-export const getCalculatedStyles = (
-  style = defaultStyle
-): typeof defaultStyle & { rowHeight: number; columnWidth: number } => {
+export const getCalculatedStyles = (style = defaultStyle): ComputedOptions => {
   const { boxHeight, width, spaceBetweenColumns, spaceBetweenRows } = style;
   const columnWidth = width + spaceBetweenColumns;
   const rowHeight = boxHeight + spaceBetweenRows;

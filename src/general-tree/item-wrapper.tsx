@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ItemComponentProps, RenderItem } from '../types';
+import { ComputedOptions, ItemComponentProps, RenderItem } from '../types';
 
 import { calculatePositionOfItem } from './calculate-treeItem-position';
 import Connector from './connector';
@@ -20,7 +20,7 @@ export function ItemWrapper<T>({
   columnIndex: number;
   item: RenderItem<T>;
   renderData: RenderItem<T>[][];
-  calculatedStyle: any;
+  calculatedStyle: ComputedOptions;
 
   itemComponent: (props: ItemComponentProps<T>) => JSX.Element;
 }) {

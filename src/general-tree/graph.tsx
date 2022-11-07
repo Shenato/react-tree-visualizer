@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ItemComponentProps, RenderMatrix } from '../types';
+import { ComputedOptions, ItemComponentProps, RenderMatrix } from '../types';
 import { itemContext } from './item-context';
 import { ItemWrapper } from './item-wrapper';
 
@@ -10,7 +10,7 @@ export function Graph<T>({
 }: {
   renderData: RenderMatrix<T>;
   itemComponent: (props: ItemComponentProps<T>) => JSX.Element;
-  calculatedStyle: any;
+  calculatedStyle: ComputedOptions;
 }) {
   const {
     state: { hoveredItems },
