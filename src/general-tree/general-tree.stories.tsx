@@ -97,6 +97,16 @@ export const Tree = () => (
   <Template tree={generalTreeMock} itemComponent={MockItemComponent} />
 );
 
+export const TreeNoViewer = () => {
+  return (
+    <GeneralTree
+      // currentRound={4}
+      itemComponent={MockItemComponent}
+      tree={generalTreeMock}
+    />
+  );
+};
+
 export const AsyncTree = () => {
   const [tree, setTree] = useState<TreeType<DebugItemDataType>>({
     id: '0',

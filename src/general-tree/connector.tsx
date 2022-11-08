@@ -7,6 +7,7 @@ type ConnectorProps = {
   currentMatchPosition: { x: number; y: number };
   calculatedStyle: ComputedOptions;
   isHighlighted: boolean;
+  isActive: boolean;
   // eslint-disable-next-line react/require-default-props
   offsetY?: number;
 };
@@ -17,6 +18,7 @@ const Connector = ({
   currentMatchPosition,
   calculatedStyle,
   isHighlighted,
+  isActive,
   offsetY = 0,
 }: ConnectorProps) => {
   const {
@@ -27,55 +29,111 @@ const Connector = ({
     lineInfo,
     horizontalOffset,
     connectorColorHighlight,
+    connectorColorActive,
     connectorLineThickness,
     width,
   } = calculatedStyle;
+  const halfConnectorLineThickness = Math.floor(connectorLineThickness / 2);
+  const halfBoxHeight = Math.floor(boxHeight / 2);
+  const halfRoundSeperatorWidth = Math.floor(roundSeparatorWidth / 2);
+  const middlePointOfMatchComponent =
+    halfBoxHeight - halfConnectorLineThickness;
 
-  const pathInfo = () => {
-    const middlePointOfMatchComponent = boxHeight / 2;
+  const getCoords = () => {
     const previousMatch = previousMatchPosition;
-    const startPoint = `${
-      currentMatchPosition.x - horizontalOffset - lineInfo.separation
-    } ${
-      currentMatchPosition.y +
+    const startPointX =
+      previousMatch.x + width + horizontalOffset + lineInfo.separation;
+    const startPointY =
+      previousMatch.y +
       lineInfo.homeVisitorSpread +
       middlePointOfMatchComponent +
-      (roundHeader.isShown ? roundHeader.height + roundHeader.marginBottom : 0)
-    }`;
-    const horizontalWidthLeft =
-      currentMatchPosition.x - roundSeparatorWidth / 2 - horizontalOffset;
+      (roundHeader.isShown ? roundHeader.height + roundHeader.marginBottom : 0);
+
+    const halfHorizontalWidth =
+      currentMatchPosition.x -
+      halfRoundSeperatorWidth -
+      horizontalOffset -
+      startPointX;
+
+    const verticalHeight = currentMatchPosition.y - previousMatch.y + offsetY;
+
     const isPreviousMatchOnSameYLevel =
       Math.abs(currentMatchPosition.y - previousMatch.y) < 1;
+    // if (isPreviousMatchOnSameYLevel) {
+    //   return [`M${startPoint}`, `H${horizontalWidthRight}`];
+    // }
 
-    const verticalHeight =
-      previousMatch.y +
-      middlePointOfMatchComponent +
-      offsetY +
-      (roundHeader.isShown ? roundHeader.height + roundHeader.marginBottom : 0);
-    const horizontalWidthRight = previousMatch.x + width;
+    // return [
+    //   `M${startPoint}`,
+    //   `H${horizontalWidthLeft}`,
+    //   `V${verticalHeight}`,
+    //   `H${horizontalWidthRight}`,
+    // ];
+    return {
+      startPointX,
+      startPointY,
+      halfHorizontalWidth,
+      verticalHeight,
 
-    if (isPreviousMatchOnSameYLevel) {
-      return [`M${startPoint}`, `H${horizontalWidthRight}`];
-    }
-
-    return [
-      `M${startPoint}`,
-      `H${horizontalWidthLeft}`,
-      `V${verticalHeight}`,
-      `H${horizontalWidthRight}`,
-    ];
+      isConnectorStraight: isPreviousMatchOnSameYLevel,
+    };
   };
 
+  function getColor() {
+    if (isHighlighted) {
+      return connectorColorHighlight;
+    }
+    if (isActive) {
+      return connectorColorActive;
+    }
+    return connectorColor;
+  }
+
+  const {
+    startPointX,
+    startPointY,
+    isConnectorStraight,
+    halfHorizontalWidth,
+    verticalHeight,
+  } = getCoords();
+
+  if (isConnectorStraight) {
+    return (
+      <g id={`connector-${id}`}>
+        <rect
+          x={startPointX}
+          y={startPointY}
+          height={connectorLineThickness}
+          width={halfHorizontalWidth * 2}
+          fill={getColor()}
+        />
+      </g>
+    );
+  }
   return (
-    <>
-      <path
-        d={pathInfo().join(' ')}
-        id={`connector-${id}`}
-        fill="transparent"
-        stroke={isHighlighted ? connectorColorHighlight : connectorColor}
-        strokeWidth={connectorLineThickness}
+    <g id={`connector-${id}`}>
+      <rect
+        x={startPointX}
+        y={startPointY}
+        height={connectorLineThickness}
+        width={halfHorizontalWidth}
+        fill={getColor()}
       />
-    </>
+      <rect
+        x={startPointX + halfHorizontalWidth - halfConnectorLineThickness}
+        y={startPointY}
+        width={connectorLineThickness}
+        height={verticalHeight}
+        fill={getColor()}
+      />
+      <rect
+        x={startPointX + halfHorizontalWidth - halfConnectorLineThickness}
+        y={startPointY + verticalHeight}
+        height={connectorLineThickness}
+        width={halfHorizontalWidth + halfConnectorLineThickness}
+        fill={getColor()}
+      />
+    </g>
   );
 };
 export default Connector;

@@ -7,8 +7,9 @@ export const defaultStyle: Options = {
   spaceBetweenColumns: 50,
   spaceBetweenRows: 50,
   connectorColor: 'rgb(47, 54, 72)',
-  connectorColorHighlight: '#DDD',
-  connectorLineThickness: '2px',
+  connectorColorHighlight: '#0085FF',
+  connectorColorActive: '#E60F58',
+  connectorLineThickness: 2,
   roundHeader: {
     isShown: true,
     height: 40,
@@ -21,7 +22,7 @@ export const defaultStyle: Options = {
   roundSeparatorWidth: 24,
   lineInfo: {
     separation: -13,
-    homeVisitorSpread: 0.5,
+    homeVisitorSpread: 1,
   },
   horizontalOffset: 13,
   wonBywalkOverText: 'WO',

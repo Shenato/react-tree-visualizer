@@ -53,7 +53,9 @@ export type Options = {
 
   connectorColorHighlight?: string;
 
-  connectorLineThickness?: string;
+  connectorColorActive?: string;
+
+  connectorLineThickness?: number;
 
   roundHeader?: {
     isShown?: boolean;
@@ -113,17 +115,19 @@ export type Tree<T> = { id: string; data: T; children: Tree<T>[] };
 
 export type ItemComponentProps<T> = {
   item: T;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
-  isCollapsed: boolean;
-  toggleCollapse: () => void;
   isHighlighted: boolean;
+  isActive: boolean;
+  isCollapsed: boolean;
   connectorColor: string;
   computedStyles: ComputedOptions;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+  toggleCollapse: () => void;
 };
 
 export type GeneralTreeProps<T> = CommonTreeProps & {
   itemComponent: (props: ItemComponentProps<T>) => JSX.Element;
+  activeItemIds?: string[];
   currentRound?: string;
   tree: Tree<T>;
 };

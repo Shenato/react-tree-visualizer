@@ -13,7 +13,7 @@ export function Graph<T>({
   calculatedStyle: ComputedOptions;
 }) {
   const {
-    state: { hoveredItems },
+    state: { hoveredItems, activeItemIds },
   } = useContext(itemContext);
 
   return (
@@ -34,6 +34,9 @@ export function Graph<T>({
           );
         })
       )}
+      {activeItemIds.slice(1).map(itemID => (
+        <use xlinkHref={`#connector-${itemID}`} />
+      ))}
       {hoveredItems.slice(1).map(itemID => (
         <use xlinkHref={`#connector-${itemID}`} />
       ))}

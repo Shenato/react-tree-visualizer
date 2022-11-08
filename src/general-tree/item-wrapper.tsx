@@ -53,7 +53,9 @@ export function ItemWrapper<T>({
   // Highlight Context
   const { dispatch } = useContext(itemContext);
 
-  const isHighlighted = useItemHighlightContext({ currentItem: item });
+  const { isHighlighted, isActive } = useItemHighlightContext({
+    currentItem: item,
+  });
   const isCollapsed = useIsCollapsed({ currentItem: item });
 
   const onMouseEnter = () => {
@@ -98,6 +100,7 @@ export function ItemWrapper<T>({
         <Connector
           id={item.id}
           isHighlighted={isHighlighted}
+          isActive={isActive}
           previousMatchPosition={parentPosition}
           currentMatchPosition={itemPosition}
           calculatedStyle={calculatedStyle}
@@ -122,6 +125,7 @@ export function ItemWrapper<T>({
                 {...{
                   item: item.data,
                   isHighlighted,
+                  isActive,
                   isCollapsed,
                   connectorColor,
                   computedStyles: calculatedStyle,

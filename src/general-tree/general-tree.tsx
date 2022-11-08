@@ -12,6 +12,7 @@ import { Graph } from './graph';
 const GeneralTreeBracket = <T,>({
   tree,
   itemComponent,
+  activeItemIds = [],
   currentRound,
   svgWrapper: SvgWrapper = ({ children }) => <div>{children}</div>,
   theme = defaultTheme,
@@ -44,7 +45,7 @@ const GeneralTreeBracket = <T,>({
   //   [ lastGame ]
   // ]
 
-  const [state, dispatch] = useItemContext(tree);
+  const [state, dispatch] = useItemContext(tree, activeItemIds);
   const { renderData } = state;
 
   const maxNumRows = renderData.reduce((biggestColumnNum, columns) => {
