@@ -7,12 +7,8 @@ import {
 } from 'react';
 
 import { RenderItem, RenderMatrix, Tree } from '../types';
-import { generateRenderTree } from './treeToRenderAdapter';
-import {
-  findItemFromRenderMatrix,
-  findPathFromItem,
-  processTree,
-} from './helpers';
+import { findItemFromRenderMatrix, findPathFromItem } from './helpers';
+import { generateRenderData } from './treeToRenderAdapter';
 
 type State = {
   // eslint-disable-next-line no-undef
@@ -28,18 +24,6 @@ const initialState: State = {
   hoveredItems: [],
   collapsedItemIds: [],
 };
-
-const store = createContext<{ state: State; dispatch: Dispatch<any> }>({
-  state: {
-    renderData: [[]],
-    activeItemIds: [],
-    hoveredItems: [],
-    collapsedItemIds: [],
-  },
-  dispatch: () => {},
-});
-
-export const itemContext = store;
 
 type ACTION_TOGGLE_COLLAPSE<T> = {
   type: 'TOGGLE_COLLAPSE';
@@ -69,11 +53,23 @@ type useItemReducerAction<T> =
   | ACTION_SET_HOVERED<T>
   | ACTION_SET_BLURRED
   | ACTION_UPDATE_TREE<T>;
+
+const store = createContext<{ state: State; dispatch: Dispatch<any> }>({
+  state: {
+    renderData: [[]],
+    activeItemIds: [],
+    hoveredItems: [],
+    collapsedItemIds: [],
+  },
+  dispatch: () => {},
+});
+
+export const itemContext = store;
 export const useItemContext = <T,>(
   initialTree: Tree<T>,
   initialActiveItemIds: string[]
 ) => {
-  const renderMatrix = processTree(initialTree);
+  const renderMatrix = generateRenderData(initialTree);
   const path = processActiveItems(renderMatrix, initialActiveItemIds);
 
   const [state, dispatch] = useReducer(
@@ -90,11 +86,10 @@ export const useItemContext = <T,>(
               )
             : [...previousState.collapsedItemIds, currentItem.uniqueId];
 
-          const { newResult: newRenderDataRaw } = generateRenderTree<T>(
-            previousState.tree,
+          const newRenderData = generateRenderData<T>(
+            initialTree,
             newCollapsedItems
           );
-          const [, ...newRenderData] = newRenderDataRaw;
 
           return {
             ...previousState,
@@ -130,7 +125,7 @@ export const useItemContext = <T,>(
         }
         case 'UPDATE_TREE': {
           const { tree, activeItemIds } = action.payload;
-          const newRenderMatrix = processTree(
+          const newRenderMatrix = generateRenderData(
             tree,
             previousState.collapsedItemIds
           );
