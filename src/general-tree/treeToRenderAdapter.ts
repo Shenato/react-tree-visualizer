@@ -1,14 +1,13 @@
-import { numArrayComparison } from '../utils/numbers';
 import { RenderMatrix, Tree } from '../types';
 
 /**
  * Return data should look like this
  *  [
- *  [ 1st Column ]
- *  [ 2nd Column ]
- *  [ 3rd Column ]
- *  [ 4th Column ]
- * ]
+ *    [ 1st Column ]
+ *    [ 2nd Column ]
+ *    [ 3rd Column ]
+ *    [ 4th Column ]
+ *  ]
  *
  */
 export function generateRenderTree<T>(
@@ -16,6 +15,7 @@ export function generateRenderTree<T>(
   collapsedIds: string[] = [],
   depth: number = 0,
   verticalStartingPoint = 0,
+  parentUniqueId: string | undefined = undefined,
   parentId: number | undefined = undefined,
   id: number = 0,
   path: number[] = [],
@@ -29,11 +29,12 @@ export function generateRenderTree<T>(
   let currentResult = result;
   let currentIterationId = id;
 
-  const { children, data, id: currentItemId, ...rest } = generalTree;
+  const { children, data, id: currentItemUniqueId, ...rest } = generalTree;
   const item = {
     ...rest,
-    uniqueId: currentItemId,
+    uniqueId: currentItemUniqueId,
     id: currentIterationId,
+    parentUniqueId,
     parentId,
     y: currentVerticalStartingPoint,
     path,
@@ -44,7 +45,7 @@ export function generateRenderTree<T>(
     ? [...currentResult[depth], item]
     : [item];
 
-  if (children.length === 0 || collapsedIds.includes(currentItemId)) {
+  if (children.length === 0 || collapsedIds.includes(currentItemUniqueId)) {
     return {
       verticalStartingPoint: currentVerticalStartingPoint + 1,
       newResult: currentResult,
@@ -62,6 +63,7 @@ export function generateRenderTree<T>(
       collapsedIds,
       depth + 1,
       currentVerticalStartingPoint,
+      currentItemUniqueId,
       id,
       currentIterationId + 1,
       [...path, i],

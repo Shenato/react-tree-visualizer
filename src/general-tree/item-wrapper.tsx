@@ -98,7 +98,7 @@ export function ItemWrapper<T>({
     <>
       {parentPosition && (
         <Connector
-          id={item.id}
+          id={item.uniqueId}
           isHighlighted={isHighlighted}
           isActive={isActive}
           previousMatchPosition={parentPosition}

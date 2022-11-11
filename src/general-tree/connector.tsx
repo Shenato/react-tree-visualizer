@@ -2,7 +2,7 @@ import React from 'react';
 import { ComputedOptions } from '../types';
 
 type ConnectorProps = {
-  id: number;
+  id: string;
   previousMatchPosition: { x: number; y: number };
   currentMatchPosition: { x: number; y: number };
   calculatedStyle: ComputedOptions;

@@ -12,8 +12,8 @@ import { generateRenderTree } from './treeToRenderAdapter';
 type State = {
   // eslint-disable-next-line no-undef
   renderData: RenderMatrix<unknown>;
-  activeItemIds: number[];
-  hoveredItems: number[];
+  activeItemIds: string[];
+  hoveredItems: string[];
   collapsedItemIds: string[];
 };
 
@@ -36,12 +36,40 @@ const store = createContext<{ state: State; dispatch: Dispatch<any> }>({
 
 export const itemContext = store;
 
+type ACTION_TOGGLE_COLLAPSE<T> = {
+  type: 'TOGGLE_COLLAPSE';
+  payload: {
+    currentItem: RenderItem<T>;
+  };
+};
+type ACTION_SET_HOVERED<T> = {
+  type: 'SET_HOVERED';
+  payload: {
+    currentHoveredItem: RenderItem<T>;
+    hoveredColumnIndex: number;
+  };
+};
+type ACTION_SET_BLURRED = {
+  type: 'SET_BLURRED';
+};
+type ACTION_UPDATE_TREE<T> = {
+  type: 'UPDATE_TREE';
+  payload: {
+    tree: Tree<T>;
+    activeItemIds: string[];
+  };
+};
+type useItemReducerAction<T> =
+  | ACTION_TOGGLE_COLLAPSE<T>
+  | ACTION_SET_HOVERED<T>
+  | ACTION_SET_BLURRED
+  | ACTION_UPDATE_TREE<T>;
 export const useItemContext = <T,>(tree: Tree<T>, activeItemIds: string[]) => {
-  const { newResult: renderDataRaw } = generateRenderTree<T>(tree);
-  const [, ...renderMatrix] = renderDataRaw;
+  const renderMatrix = processTree(tree);
+  const path = processActiveItems(renderMatrix, activeItemIds);
 
   const [state, dispatch] = useReducer(
-    (previousState, action) => {
+    (previousState, action: useItemReducerAction<T>) => {
       switch (action.type) {
         case 'TOGGLE_COLLAPSE': {
           const { currentItem } = action.payload ?? {};
@@ -73,17 +101,17 @@ export const useItemContext = <T,>(tree: Tree<T>, activeItemIds: string[]) => {
             // hoveredRowIndex: rowIndex,
           } = action.payload ?? {};
 
-          const path = currentHoveredItem
+          const newPath = currentHoveredItem
             ? findPathFromItem(
-                [currentHoveredItem.id],
-                currentHoveredItem.parentId,
+                [currentHoveredItem.uniqueId],
+                currentHoveredItem.parentUniqueId,
                 previousState.renderData.slice(0, Math.max(columnIndex, 0))
               )
             : [];
 
           return {
             ...previousState,
-            hoveredItems: path,
+            hoveredItems: newPath,
           };
         }
         case 'SET_BLURRED': {
@@ -93,48 +121,33 @@ export const useItemContext = <T,>(tree: Tree<T>, activeItemIds: string[]) => {
           };
         }
         case 'UPDATE_TREE': {
-          const { newResult: renderDataRawUpdated } = generateRenderTree<T>(
+          const { tree, activeItemIds } = action.payload;
+          const newRenderMatrix = processTree(
             tree,
             previousState.collapsedItemIds
           );
-          const [, ...renderMatrixUpdated] = renderDataRawUpdated;
-
-          const path: number[] =
-            activeItemIds.length > 0
-              ? activeItemIds.reduce((acc, activeItemUniqueId) => {
-                  const { item, column } = findItemFromRenderMatrix(
-                    renderMatrixUpdated,
-                    activeItemUniqueId
-                  );
-                  if (item == null) {
-                    return acc;
-                  }
-                  const newIds = findPathFromItem(
-                    [item.id],
-                    item.parentId,
-                    previousState.renderData.slice(0, Math.max(column, 0))
-                  );
-
-                  return [...acc, ...newIds];
-                }, [])
-              : [];
+          const newActiveItemsId = processActiveItems(
+            newRenderMatrix,
+            activeItemIds
+          );
 
           return {
             ...previousState,
-            renderData: renderMatrixUpdated,
-            activeItemIds: path,
+            renderData: newRenderMatrix,
+            activeItemIds: newActiveItemsId,
           };
         }
-        default:
-          return { ...previousState, renderData: renderMatrix, activeItemIds };
+        default: {
+          return previousState;
+        }
       }
     },
-    { ...initialState, renderData: renderMatrix, activeItemIds }
+    { ...initialState, renderData: renderMatrix, activeItemIds: path }
   );
 
   useEffect(() => {
     dispatch({ type: 'UPDATE_TREE', payload: { tree, activeItemIds } });
-  }, [tree]);
+  }, [tree, activeItemIds]);
 
   return [state, dispatch];
 };
@@ -148,15 +161,12 @@ export const useItemHighlightContext = <T,>({
     state: { hoveredItems, activeItemIds },
   } = useContext(itemContext);
 
-  const highlighted = hoveredItems.some(itemId => itemId === currentItem.id);
-  const isActive = activeItemIds.some(itemId => itemId === currentItem.id);
-  console.log('activeItemIds:', activeItemIds);
-
-  // @ts-ignore
-  if (currentItem.data?.isFocused) {
-    console.log('item.id:', currentItem.id);
-    console.log('isActive:', isActive);
-  }
+  const highlighted = hoveredItems.some(
+    itemId => itemId === currentItem.uniqueId
+  );
+  const isActive = activeItemIds.some(
+    itemId => itemId === currentItem.uniqueId
+  );
 
   return { isHighlighted: highlighted, isActive };
 };
@@ -178,10 +188,10 @@ export const useIsCollapsed = <T,>({
 };
 
 function findPathFromItem<T>(
-  result: number[] = [],
-  parentId: number,
+  result: string[] = [],
+  parentId: string,
   renderMatrix: RenderMatrix<T>
-): number[] {
+): string[] {
   if (renderMatrix.length === 0) {
     return result;
   }
@@ -189,14 +199,50 @@ function findPathFromItem<T>(
     return [parentId, ...result];
   }
   const currentParentItem = renderMatrix[renderMatrix.length - 1].find(
-    parent => parent.id === parentId
+    parent => parent.uniqueId === parentId
   );
   const newRenderMatrix = renderMatrix.slice(0, -1);
   return findPathFromItem(
-    [currentParentItem.id, ...result],
-    currentParentItem.parentId,
+    [currentParentItem.uniqueId, ...result],
+    currentParentItem.parentUniqueId,
     newRenderMatrix
   );
+}
+
+function processTree<T>(tree: Tree<T>, collpasedItemIds?: string[]) {
+  const { newResult: renderDataRawUpdated } = generateRenderTree<T>(
+    tree,
+    collpasedItemIds
+  );
+  const [, ...renderMatrix] = renderDataRawUpdated;
+
+  return renderMatrix;
+}
+
+function processActiveItems<T>(
+  renderMatrix: RenderMatrix<T>,
+  activeItemIds: string[]
+) {
+  const path: number[] =
+    activeItemIds.length > 0
+      ? activeItemIds.reduce((acc, activeItemUniqueId) => {
+          const { item, column } = findItemFromRenderMatrix(
+            renderMatrix,
+            activeItemUniqueId
+          );
+          if (item == null) {
+            return acc;
+          }
+          const newIds = findPathFromItem(
+            [item.uniqueId],
+            item.parentUniqueId,
+            renderMatrix.slice(0, Math.max(column, 0))
+          );
+
+          return [...acc, ...newIds];
+        }, [])
+      : [];
+  return path;
 }
 
 function findItemFromRenderMatrix<T>(

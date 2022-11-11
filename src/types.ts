@@ -101,11 +101,12 @@ export type CommonTreeProps = {
 };
 
 export type RenderItem<T> = {
-  uniqueId: string;
   id: number;
+  uniqueId: string;
+  parentId?: number;
+  parentUniqueId: string;
   y: number;
   path: number[];
-  parentId?: number;
   data: T;
 };
 

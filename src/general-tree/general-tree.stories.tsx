@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 
 import styled from 'styled-components';
@@ -30,6 +30,8 @@ const StyledSvgViewer = styled(SvgViewer).attrs(props => {
   };
 })``;
 
+const activeItemSetterContext = createContext((itemId: string) => {});
+
 const MockItemComponent = ({
   item,
   onMouseEnter,
@@ -39,7 +41,8 @@ const MockItemComponent = ({
   isHighlighted,
   connectorColor,
   computedStyles,
-}: ItemComponentProps<any>) => {
+}: ItemComponentProps<DebugItemDataType>) => {
+  const setActiveItem = useContext(activeItemSetterContext);
   return (
     <div
       style={{
@@ -48,6 +51,7 @@ const MockItemComponent = ({
         display: 'flex',
         alignItems: 'center',
       }}
+      onDoubleClick={() => setActiveItem?.(`${item.id}`)}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -97,6 +101,23 @@ export const Tree = () => (
   <Template tree={generalTreeMock} itemComponent={MockItemComponent} />
 );
 
+export const TreeWithActiveItems = () => {
+  const [activeItem, setActiveItem] = useState('22');
+
+  return (
+    <activeItemSetterContext.Provider
+      value={(itemId: string) => {
+        setActiveItem(itemId);
+      }}
+    >
+      <GeneralTree
+        activeItemIds={[activeItem]}
+        itemComponent={MockItemComponent}
+        tree={generalTreeMock}
+      />
+    </activeItemSetterContext.Provider>
+  );
+};
 export const TreeNoViewer = () => {
   return (
     <GeneralTree
