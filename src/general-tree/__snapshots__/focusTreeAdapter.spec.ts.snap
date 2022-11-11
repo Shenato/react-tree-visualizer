@@ -4,20 +4,9 @@ exports[`given a bigger example converts it to render data 1`] = `
 Array [
   Array [
     Object {
-      "data": Object {
-        "id": 0,
-        "type": 0,
-      },
-      "id": 0,
-      "parentId": undefined,
-      "parentUniqueId": undefined,
-      "treePath": Array [],
-      "uniqueId": "0",
-      "y": 0,
-    },
-  ],
-  Array [
-    Object {
+      "ancestryIds": Array [
+        "0",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -25,6 +14,10 @@ Array [
         "type": 1,
       },
       "id": 1,
+      "matrixPosition": Array [
+        0,
+        0,
+      ],
       "parentId": 0,
       "parentUniqueId": "0",
       "treePath": Array [
@@ -34,6 +27,9 @@ Array [
       "y": 0,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -41,6 +37,10 @@ Array [
         "type": 2,
       },
       "id": 4,
+      "matrixPosition": Array [
+        2,
+        1,
+      ],
       "parentId": 0,
       "parentUniqueId": "0",
       "treePath": Array [
@@ -52,6 +52,10 @@ Array [
   ],
   Array [
     Object {
+      "ancestryIds": Array [
+        "0",
+        "1",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -59,6 +63,10 @@ Array [
         "type": 1,
       },
       "id": 2,
+      "matrixPosition": Array [
+        1,
+        0,
+      ],
       "parentId": 1,
       "parentUniqueId": "1",
       "treePath": Array [
@@ -69,6 +77,10 @@ Array [
       "y": 0,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "1",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -76,6 +88,10 @@ Array [
         "type": 2,
       },
       "id": 3,
+      "matrixPosition": Array [
+        2,
+        1,
+      ],
       "parentId": 1,
       "parentUniqueId": "1",
       "treePath": Array [
@@ -86,6 +102,10 @@ Array [
       "y": 1,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -93,6 +113,10 @@ Array [
         "type": 1,
       },
       "id": 5,
+      "matrixPosition": Array [
+        2,
+        2,
+      ],
       "parentId": 4,
       "parentUniqueId": "4",
       "treePath": Array [
@@ -110,20 +134,9 @@ exports[`given a bigger example converts it to render data with collapsed childr
 Array [
   Array [
     Object {
-      "data": Object {
-        "id": 0,
-        "type": 0,
-      },
-      "id": 0,
-      "parentId": undefined,
-      "parentUniqueId": undefined,
-      "treePath": Array [],
-      "uniqueId": "0",
-      "y": 0,
-    },
-  ],
-  Array [
-    Object {
+      "ancestryIds": Array [
+        "0",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -131,6 +144,10 @@ Array [
         "type": 1,
       },
       "id": 1,
+      "matrixPosition": Array [
+        0,
+        0,
+      ],
       "parentId": 0,
       "parentUniqueId": "0",
       "treePath": Array [
@@ -140,6 +157,9 @@ Array [
       "y": 0,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -147,6 +167,10 @@ Array [
         "type": 2,
       },
       "id": 4,
+      "matrixPosition": Array [
+        2,
+        1,
+      ],
       "parentId": 0,
       "parentUniqueId": "0",
       "treePath": Array [
@@ -158,6 +182,10 @@ Array [
   ],
   Array [
     Object {
+      "ancestryIds": Array [
+        "0",
+        "1",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -165,6 +193,10 @@ Array [
         "type": 1,
       },
       "id": 2,
+      "matrixPosition": Array [
+        1,
+        0,
+      ],
       "parentId": 1,
       "parentUniqueId": "1",
       "treePath": Array [
@@ -175,6 +207,10 @@ Array [
       "y": 0,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "1",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -182,6 +218,10 @@ Array [
         "type": 2,
       },
       "id": 3,
+      "matrixPosition": Array [
+        2,
+        1,
+      ],
       "parentId": 1,
       "parentUniqueId": "1",
       "treePath": Array [
@@ -199,20 +239,9 @@ exports[`given a real example general tree converts it to render data 1`] = `
 Array [
   Array [
     Object {
-      "data": Object {
-        "id": 0,
-        "type": 0,
-      },
-      "id": 0,
-      "parentId": undefined,
-      "parentUniqueId": undefined,
-      "treePath": Array [],
-      "uniqueId": "0",
-      "y": 0,
-    },
-  ],
-  Array [
-    Object {
+      "ancestryIds": Array [
+        "0",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -220,6 +249,10 @@ Array [
         "type": 1,
       },
       "id": 1,
+      "matrixPosition": Array [
+        0,
+        0,
+      ],
       "parentId": 0,
       "parentUniqueId": "0",
       "treePath": Array [
@@ -231,6 +264,10 @@ Array [
   ],
   Array [
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -238,6 +275,10 @@ Array [
         "type": 1,
       },
       "id": 2,
+      "matrixPosition": Array [
+        1,
+        0,
+      ],
       "parentId": 1,
       "parentUniqueId": "4",
       "treePath": Array [
@@ -248,6 +289,10 @@ Array [
       "y": 0,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -255,6 +300,10 @@ Array [
         "type": 1,
       },
       "id": 4,
+      "matrixPosition": Array [
+        3,
+        1,
+      ],
       "parentId": 1,
       "parentUniqueId": "4",
       "treePath": Array [
@@ -267,11 +316,20 @@ Array [
   ],
   Array [
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "14",
+      ],
       "data": Object {
         "id": 45,
         "type": 0,
       },
       "id": 3,
+      "matrixPosition": Array [
+        2,
+        0,
+      ],
       "parentId": 2,
       "parentUniqueId": "14",
       "treePath": Array [
@@ -283,6 +341,11 @@ Array [
       "y": 0,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -291,6 +354,10 @@ Array [
         "type": 1,
       },
       "id": 5,
+      "matrixPosition": Array [
+        3,
+        1,
+      ],
       "parentId": 4,
       "parentUniqueId": "15",
       "treePath": Array [
@@ -302,6 +369,11 @@ Array [
       "y": 1,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+      ],
       "data": Object {
         "disabled": false,
         "hidden": false,
@@ -310,6 +382,10 @@ Array [
         "type": 1,
       },
       "id": 14,
+      "matrixPosition": Array [
+        4,
+        2,
+      ],
       "parentId": 4,
       "parentUniqueId": "15",
       "treePath": Array [
@@ -323,11 +399,21 @@ Array [
   ],
   Array [
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "17",
+      ],
       "data": Object {
         "id": 22,
         "type": 0,
       },
       "id": 6,
+      "matrixPosition": Array [
+        3,
+        0,
+      ],
       "parentId": 5,
       "parentUniqueId": "17",
       "treePath": Array [
@@ -340,11 +426,21 @@ Array [
       "y": 1,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "17",
+      ],
       "data": Object {
         "id": 23,
         "type": 0,
       },
       "id": 7,
+      "matrixPosition": Array [
+        4,
+        1,
+      ],
       "parentId": 5,
       "parentUniqueId": "17",
       "treePath": Array [
@@ -357,11 +453,21 @@ Array [
       "y": 2,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "17",
+      ],
       "data": Object {
         "id": 24,
         "type": 0,
       },
       "id": 8,
+      "matrixPosition": Array [
+        4,
+        2,
+      ],
       "parentId": 5,
       "parentUniqueId": "17",
       "treePath": Array [
@@ -374,11 +480,21 @@ Array [
       "y": 3,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "17",
+      ],
       "data": Object {
         "id": 25,
         "type": 0,
       },
       "id": 9,
+      "matrixPosition": Array [
+        4,
+        3,
+      ],
       "parentId": 5,
       "parentUniqueId": "17",
       "treePath": Array [
@@ -391,11 +507,21 @@ Array [
       "y": 4,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "17",
+      ],
       "data": Object {
         "id": 26,
         "type": 0,
       },
       "id": 10,
+      "matrixPosition": Array [
+        4,
+        4,
+      ],
       "parentId": 5,
       "parentUniqueId": "17",
       "treePath": Array [
@@ -408,11 +534,21 @@ Array [
       "y": 5,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "17",
+      ],
       "data": Object {
         "id": 27,
         "type": 0,
       },
       "id": 11,
+      "matrixPosition": Array [
+        4,
+        5,
+      ],
       "parentId": 5,
       "parentUniqueId": "17",
       "treePath": Array [
@@ -425,11 +561,21 @@ Array [
       "y": 6,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "17",
+      ],
       "data": Object {
         "id": 28,
         "type": 0,
       },
       "id": 12,
+      "matrixPosition": Array [
+        4,
+        6,
+      ],
       "parentId": 5,
       "parentUniqueId": "17",
       "treePath": Array [
@@ -442,11 +588,21 @@ Array [
       "y": 7,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "17",
+      ],
       "data": Object {
         "id": 29,
         "type": 0,
       },
       "id": 13,
+      "matrixPosition": Array [
+        4,
+        7,
+      ],
       "parentId": 5,
       "parentUniqueId": "17",
       "treePath": Array [
@@ -459,11 +615,21 @@ Array [
       "y": 8,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 21,
         "type": 0,
       },
       "id": 15,
+      "matrixPosition": Array [
+        4,
+        8,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -476,12 +642,22 @@ Array [
       "y": 9,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "disabled": true,
         "id": 20,
         "type": 0,
       },
       "id": 16,
+      "matrixPosition": Array [
+        4,
+        9,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -494,11 +670,21 @@ Array [
       "y": 10,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 30,
         "type": 0,
       },
       "id": 17,
+      "matrixPosition": Array [
+        4,
+        10,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -511,11 +697,21 @@ Array [
       "y": 11,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 31,
         "type": 0,
       },
       "id": 18,
+      "matrixPosition": Array [
+        4,
+        11,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -528,12 +724,22 @@ Array [
       "y": 12,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "disabled": true,
         "id": 32,
         "type": 0,
       },
       "id": 19,
+      "matrixPosition": Array [
+        4,
+        12,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -546,12 +752,22 @@ Array [
       "y": 13,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "disabled": true,
         "id": 33,
         "type": 0,
       },
       "id": 20,
+      "matrixPosition": Array [
+        4,
+        13,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -564,12 +780,22 @@ Array [
       "y": 14,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "disabled": true,
         "id": 34,
         "type": 0,
       },
       "id": 21,
+      "matrixPosition": Array [
+        4,
+        14,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -582,11 +808,21 @@ Array [
       "y": 15,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 35,
         "type": 0,
       },
       "id": 22,
+      "matrixPosition": Array [
+        4,
+        15,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -599,11 +835,21 @@ Array [
       "y": 16,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 36,
         "type": 0,
       },
       "id": 23,
+      "matrixPosition": Array [
+        4,
+        16,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -616,11 +862,21 @@ Array [
       "y": 17,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 37,
         "type": 0,
       },
       "id": 24,
+      "matrixPosition": Array [
+        4,
+        17,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -633,11 +889,21 @@ Array [
       "y": 18,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 38,
         "type": 0,
       },
       "id": 25,
+      "matrixPosition": Array [
+        4,
+        18,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -650,11 +916,21 @@ Array [
       "y": 19,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 39,
         "type": 0,
       },
       "id": 26,
+      "matrixPosition": Array [
+        4,
+        19,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -667,11 +943,21 @@ Array [
       "y": 20,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 40,
         "type": 0,
       },
       "id": 27,
+      "matrixPosition": Array [
+        4,
+        20,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -684,11 +970,21 @@ Array [
       "y": 21,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 41,
         "type": 0,
       },
       "id": 28,
+      "matrixPosition": Array [
+        4,
+        21,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -701,11 +997,21 @@ Array [
       "y": 22,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 42,
         "type": 0,
       },
       "id": 29,
+      "matrixPosition": Array [
+        4,
+        22,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -718,11 +1024,21 @@ Array [
       "y": 23,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 43,
         "type": 0,
       },
       "id": 30,
+      "matrixPosition": Array [
+        4,
+        23,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [
@@ -735,11 +1051,21 @@ Array [
       "y": 24,
     },
     Object {
+      "ancestryIds": Array [
+        "0",
+        "4",
+        "15",
+        "19",
+      ],
       "data": Object {
         "id": 44,
         "type": 0,
       },
       "id": 31,
+      "matrixPosition": Array [
+        4,
+        24,
+      ],
       "parentId": 14,
       "parentUniqueId": "19",
       "treePath": Array [

@@ -10,7 +10,7 @@ import { RenderMatrix, Tree } from '../types';
  *  ]
  *
  */
-export function generateRenderTree<T>(
+export function generateRawRenderData<T>(
   generalTree: Tree<T>,
   collapsedIds: string[] = [],
   depth: number = 0,
@@ -19,6 +19,7 @@ export function generateRenderTree<T>(
   parentId: number | undefined = undefined,
   id: number = 0,
   treePath: number[] = [],
+  ancestryIds: string[] = [],
   result: RenderMatrix<T> = [[]]
 ): {
   verticalStartingPoint: number;
@@ -37,6 +38,11 @@ export function generateRenderTree<T>(
     parentUniqueId,
     parentId,
     y: currentVerticalStartingPoint,
+    ancestryIds,
+    matrixPosition: [
+      currentResult.length - 1,
+      currentResult[depth]?.length ?? 0,
+    ],
     treePath,
     data,
   };
@@ -58,7 +64,7 @@ export function generateRenderTree<T>(
       newResult,
       verticalStartingPoint: resultingVerticalStartingPoint,
       id: resultId,
-    } = generateRenderTree(
+    } = generateRawRenderData(
       children[i],
       collapsedIds,
       depth + 1,
@@ -67,6 +73,7 @@ export function generateRenderTree<T>(
       id,
       currentIterationId + 1,
       [...treePath, i],
+      [...ancestryIds, currentItemUniqueId],
       currentResult
     );
     currentIterationId = resultId;
@@ -79,4 +86,21 @@ export function generateRenderTree<T>(
     newResult: currentResult,
     id: currentIterationId,
   };
+}
+
+export function generateRenderData<T>(
+  tree: Tree<T>[],
+  collpasedItemIds?: string[]
+) {
+  const { newResult: renderDataRawUpdated } = generateRawRenderData<T>(
+    {
+      id: '',
+      data: { id: 0, ref: false, type: 0, isFocused: false, shortcuts: [] },
+      children: tree,
+    },
+    collpasedItemIds
+  );
+  const [, ...renderMatrix] = renderDataRawUpdated;
+
+  return renderMatrix;
 }

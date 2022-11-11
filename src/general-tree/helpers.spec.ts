@@ -1,14 +1,11 @@
 import { DebugItemDataType } from 'types';
-import {
-  findItemFromRenderMatrix,
-  findPathFromItem,
-  processTree,
-} from './helpers';
+import { findItemFromRenderMatrix, findPathFromItem } from './helpers';
 import { simpleTree } from '../mock-data/simple-tree';
+import { generateRenderData } from './treeToRenderAdapter';
 
 describe('findPathFromItem', () => {
   it('converts it to render data', () => {
-    const renderMatrix = processTree(simpleTree);
+    const renderMatrix = generateRenderData(simpleTree);
     const columnIndex = 3;
     const rowIndex = 4;
     const testItem = renderMatrix[columnIndex][rowIndex];
@@ -25,7 +22,7 @@ describe('findPathFromItem', () => {
 
 describe('findItemFromRenderMatrix', () => {
   it('converts it to render data', () => {
-    const renderMatrix = processTree(simpleTree);
+    const renderMatrix = generateRenderData(simpleTree);
     const columnIndex = 3;
     const rowIndex = 4;
     const testItem = renderMatrix[columnIndex][rowIndex];
