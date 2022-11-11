@@ -18,7 +18,7 @@ export function generateRenderTree<T>(
   parentUniqueId: string | undefined = undefined,
   parentId: number | undefined = undefined,
   id: number = 0,
-  path: number[] = [],
+  treePath: number[] = [],
   result: RenderMatrix<T> = [[]]
 ): {
   verticalStartingPoint: number;
@@ -37,7 +37,7 @@ export function generateRenderTree<T>(
     parentUniqueId,
     parentId,
     y: currentVerticalStartingPoint,
-    path,
+    treePath,
     data,
   };
 
@@ -66,7 +66,7 @@ export function generateRenderTree<T>(
       currentItemUniqueId,
       id,
       currentIterationId + 1,
-      [...path, i],
+      [...treePath, i],
       currentResult
     );
     currentIterationId = resultId;

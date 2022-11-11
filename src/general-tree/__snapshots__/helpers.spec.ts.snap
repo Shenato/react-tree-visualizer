@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`findPathFromItem converts it to render data 1`] = `
+Array [
+  "4",
+  "15",
+  "17",
+  "26",
+]
+`;

@@ -97,11 +97,11 @@ const Template = ({ tree, itemComponent, ...args }) => {
   );
 };
 
-export const Tree = () => (
+export const TreeWithViewer = () => (
   <Template tree={generalTreeMock} itemComponent={MockItemComponent} />
 );
 
-export const TreeWithActiveItems = () => {
+export const TreeWithActiveItemsWithNoViewer = () => {
   const [activeItem, setActiveItem] = useState('22');
 
   return (
@@ -118,7 +118,7 @@ export const TreeWithActiveItems = () => {
     </activeItemSetterContext.Provider>
   );
 };
-export const TreeNoViewer = () => {
+export const TreeWithNoViewer = () => {
   return (
     <GeneralTree
       // currentRound={4}
@@ -128,7 +128,7 @@ export const TreeNoViewer = () => {
   );
 };
 
-export const AsyncTree = () => {
+export const AsyncTreeWithNoViewer = () => {
   const [tree, setTree] = useState<TreeType<DebugItemDataType>>({
     id: '0',
     data: { id: 0, type: 0 },
@@ -143,7 +143,7 @@ export const AsyncTree = () => {
   return <Template tree={tree} itemComponent={MockItemComponent} />;
 };
 
-export const MutatingTreeAtLeaf = () => {
+export const MutatingTreeAtLeafWithNoViewer = () => {
   const [tree, setTree] = useState<TreeType<DebugItemDataType>>({
     id: '0',
     data: { id: 0, type: 0 },

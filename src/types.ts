@@ -106,7 +106,7 @@ export type RenderItem<T> = {
   parentId?: number;
   parentUniqueId: string;
   y: number;
-  path: number[];
+  treePath: number[];
   data: T;
 };
 
