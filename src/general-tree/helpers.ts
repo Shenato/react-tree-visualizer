@@ -1,15 +1,5 @@
 import { RenderMatrix, Tree } from '../types';
-import { generateRenderTree } from './treeToRenderAdapter';
 
-export function processTree<T>(tree: Tree<T>, collpasedItemIds?: string[]) {
-  const { newResult: renderDataRawUpdated } = generateRenderTree<T>(
-    tree,
-    collpasedItemIds
-  );
-  const [, ...renderMatrix] = renderDataRawUpdated;
-
-  return renderMatrix;
-}
 export function findPathFromItem<T>(
   result: string[] = [],
   parentId: string,

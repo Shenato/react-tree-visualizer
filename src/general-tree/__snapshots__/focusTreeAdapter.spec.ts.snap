@@ -5,20 +5,6 @@ Array [
   Array [
     Object {
       "data": Object {
-        "id": 0,
-        "type": 0,
-      },
-      "id": 0,
-      "parentId": undefined,
-      "parentUniqueId": undefined,
-      "treePath": Array [],
-      "uniqueId": "0",
-      "y": 0,
-    },
-  ],
-  Array [
-    Object {
-      "data": Object {
         "disabled": false,
         "hidden": false,
         "id": 1,
@@ -111,20 +97,6 @@ Array [
   Array [
     Object {
       "data": Object {
-        "id": 0,
-        "type": 0,
-      },
-      "id": 0,
-      "parentId": undefined,
-      "parentUniqueId": undefined,
-      "treePath": Array [],
-      "uniqueId": "0",
-      "y": 0,
-    },
-  ],
-  Array [
-    Object {
-      "data": Object {
         "disabled": false,
         "hidden": false,
         "id": 1,
@@ -197,20 +169,6 @@ Array [
 
 exports[`given a real example general tree converts it to render data 1`] = `
 Array [
-  Array [
-    Object {
-      "data": Object {
-        "id": 0,
-        "type": 0,
-      },
-      "id": 0,
-      "parentId": undefined,
-      "parentUniqueId": undefined,
-      "treePath": Array [],
-      "uniqueId": "0",
-      "y": 0,
-    },
-  ],
   Array [
     Object {
       "data": Object {

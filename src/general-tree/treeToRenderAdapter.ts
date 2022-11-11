@@ -10,7 +10,7 @@ import { RenderMatrix, Tree } from '../types';
  *  ]
  *
  */
-export function generateRenderTree<T>(
+export function generateRawRenderData<T>(
   generalTree: Tree<T>,
   collapsedIds: string[] = [],
   depth: number = 0,
@@ -58,7 +58,7 @@ export function generateRenderTree<T>(
       newResult,
       verticalStartingPoint: resultingVerticalStartingPoint,
       id: resultId,
-    } = generateRenderTree(
+    } = generateRawRenderData(
       children[i],
       collapsedIds,
       depth + 1,
@@ -67,6 +67,7 @@ export function generateRenderTree<T>(
       id,
       currentIterationId + 1,
       [...treePath, i],
+
       currentResult
     );
     currentIterationId = resultId;
@@ -79,4 +80,17 @@ export function generateRenderTree<T>(
     newResult: currentResult,
     id: currentIterationId,
   };
+}
+
+export function generateRenderData<T>(
+  tree: Tree<T>,
+  collpasedItemIds?: string[]
+) {
+  const { newResult: renderDataRawUpdated } = generateRawRenderData<T>(
+    tree,
+    collpasedItemIds
+  );
+  const [, ...renderMatrix] = renderDataRawUpdated;
+
+  return renderMatrix;
 }
