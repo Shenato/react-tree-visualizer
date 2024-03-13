@@ -22,6 +22,7 @@ export function Graph<T>({
         column.map((item, rowIndex) => {
           return (
             <ItemWrapper
+              key={item.id}
               {...{
                 columnIndex,
                 item,
@@ -35,10 +36,10 @@ export function Graph<T>({
         })
       )}
       {activeItemIds.slice(1).map(itemID => (
-        <use xlinkHref={`#connector-${itemID}`} />
+        <use xlinkHref={`#connector-${itemID}`} key={itemID} />
       ))}
       {hoveredItems.slice(1).map(itemID => (
-        <use xlinkHref={`#connector-${itemID}`} />
+        <use xlinkHref={`#connector-${itemID}`} key={itemID} />
       ))}
     </g>
   );
