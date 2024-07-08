@@ -56,11 +56,6 @@ module.exports = {
     libraryTarget: 'umd',
   },
   externals: {
-    'styled-components': {
-      commonjs: 'styled-components',
-      commonjs2: 'styled-components',
-      amd: 'styled-components',
-    },
     'react': {
       commonjs: 'react',
       commonjs2: 'react',
