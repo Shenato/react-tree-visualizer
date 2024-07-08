@@ -56,9 +56,6 @@ export type CommonTreeProps = {
     startAt: number[];
     children: ReactElement;
   }) => React.ReactElement;
-
-  theme?: Theme;
-
   options?: { style: Options };
 };
 
