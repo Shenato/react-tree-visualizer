@@ -1,12 +1,10 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 
 import { itemContext, useItemContext } from './item-context';
 import { GeneralTreeProps } from '../types';
 import { defaultStyle, getCalculatedStyles } from '../settings';
 import { calculateSVGDimensions } from './calculate-svg-dimensions';
 
-import defaultTheme from '../themes/themes';
 import { Graph } from './graph';
 
 const GeneralTreeBracket = <T,>({
@@ -15,7 +13,6 @@ const GeneralTreeBracket = <T,>({
   activeItemIds = [],
   currentRound,
   svgWrapper: SvgWrapper = ({ children }) => <div>{children}</div>,
-  theme = defaultTheme,
   options: { style: inputStyle } = {
     style: defaultStyle,
   },
@@ -69,27 +66,25 @@ const GeneralTreeBracket = <T,>({
   );
 
   return (
-    <ThemeProvider theme={theme}>
-      <SvgWrapper
-        bracketWidth={gameWidth}
-        bracketHeight={gameHeight}
-        startAt={startPosition}
+    <SvgWrapper
+      bracketWidth={gameWidth}
+      bracketHeight={gameHeight}
+      startAt={startPosition}
+    >
+      <svg
+        height={gameHeight}
+        width={gameWidth}
+        viewBox={`0 0 ${gameWidth} ${gameHeight}`}
       >
-        <svg
-          height={gameHeight}
-          width={gameWidth}
-          viewBox={`0 0 ${gameWidth} ${gameHeight}`}
-        >
-          <itemContext.Provider value={{ state, dispatch }}>
-            <Graph
-              renderData={renderData}
-              itemComponent={itemComponent}
-              calculatedStyle={calculatedStyle}
-            />
-          </itemContext.Provider>
-        </svg>
-      </SvgWrapper>
-    </ThemeProvider>
+        <itemContext.Provider value={{ state, dispatch }}>
+          <Graph
+            renderData={renderData}
+            itemComponent={itemComponent}
+            calculatedStyle={calculatedStyle}
+          />
+        </itemContext.Provider>
+      </svg>
+    </SvgWrapper>
   );
 };
 

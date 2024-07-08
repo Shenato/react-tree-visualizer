@@ -1,43 +1,5 @@
 import React, { ReactElement } from 'react';
 
-export type Theme = {
-  fontFamily: string;
-
-  transitionTimingFunction: string;
-
-  disabledColor: string;
-
-  matchBackground: {
-    wonColor: string;
-    lostColor: string;
-  };
-
-  border: {
-    color: string;
-    highlightedColor: string;
-  };
-
-  textColor: {
-    highlighted: string;
-    main: string;
-    dark: string;
-    disabled: string;
-  };
-
-  score: {
-    text: {
-      highlightedWonColor: string;
-      highlightedLostColor: string;
-    };
-    background: {
-      wonColor: string;
-      lostColor: string;
-    };
-  };
-
-  canvasBackground: string;
-};
-
 export type Options = {
   width?: number;
 
@@ -94,9 +56,6 @@ export type CommonTreeProps = {
     startAt: number[];
     children: ReactElement;
   }) => React.ReactElement;
-
-  theme?: Theme;
-
   options?: { style: Options };
 };
 

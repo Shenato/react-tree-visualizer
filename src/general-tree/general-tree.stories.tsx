@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 
-import styled from 'styled-components';
 import useWindowSize from '../hooks/use-window-size';
 import {
   DebugItemDataType,
@@ -22,13 +21,6 @@ export default {
   title: 'Components/Tree',
   component: GeneralTree,
 };
-
-const StyledSvgViewer = styled(SvgViewer).attrs(props => {
-  return {
-    background: props.theme.canvasBackground,
-    SVGBackground: props.theme.canvasBackground,
-  };
-})``;
 
 const activeItemSetterContext = createContext((itemId: string) => {});
 
@@ -87,9 +79,9 @@ const Template = ({ tree, itemComponent, ...args }) => {
       // currentRound={4}
       itemComponent={itemComponent}
       svgWrapper={({ children, ...props }) => (
-        <StyledSvgViewer width={finalWidth} height={finalHeight} {...props}>
+        <SvgViewer width={finalWidth} height={finalHeight} {...props}>
           {children}
-        </StyledSvgViewer>
+        </SvgViewer>
       )}
       tree={tree}
       {...args}
